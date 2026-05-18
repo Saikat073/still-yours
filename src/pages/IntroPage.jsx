@@ -11,17 +11,6 @@ export default function IntroPage({ onEnter }) {
 
   useEffect(() => {
 
-    // PLAY INTRO MUSIC
-    if (audioRef.current) {
-      audioRef.current.volume = 0.5;
-
-      setTimeout(() => {
-        audioRef.current.play().catch(() => {
-          console.log("Autoplay blocked");
-        });
-      }, 500);
-    }
-
     // SHOW SECOND TEXT
     const timer1 = setTimeout(() => {
       setShowSecond(true);
@@ -39,21 +28,24 @@ export default function IntroPage({ onEnter }) {
 
   }, []);
 
-  // FADE OUT MUSIC
-  const handleEnter = () => {
+  // START MUSIC AFTER BUTTON CLICK
+  const handleEnter = async () => {
 
-    const fadeAudio = setInterval(() => {
+    if (audioRef.current) {
 
-      if (audioRef.current.volume > 0.05) {
-        audioRef.current.volume -= 0.05;
-      } else {
-        audioRef.current.pause();
-        clearInterval(fadeAudio);
+      audioRef.current.volume = 0.5;
 
-        onEnter();
+      try {
+        await audioRef.current.play();
+      } catch (err) {
+        console.log("Audio play blocked");
       }
+    }
 
-    }, 100);
+    // SMALL DELAY FOR CINEMATIC EFFECT
+    setTimeout(() => {
+      onEnter();
+    }, 1500);
   };
 
   return (
