@@ -14,12 +14,12 @@ export default function IntroPage({ onEnter }) {
     // SHOW SECOND TEXT
     const timer1 = setTimeout(() => {
       setShowSecond(true);
-    }, 2500);
+    }, 2000);
 
     // SHOW BUTTON
     const timer2 = setTimeout(() => {
       setShowButton(true);
-    }, 5000);
+    }, 3000);
 
     return () => {
       clearTimeout(timer1);
@@ -43,7 +43,7 @@ export default function IntroPage({ onEnter }) {
         // WAIT BEFORE ENTERING WEBSITE
         setTimeout(() => {
           onEnter();
-        }, 17000);
+        }, 18000);
 
       } catch (err) {
         console.log("Audio play blocked");
