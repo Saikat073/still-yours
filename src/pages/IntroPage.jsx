@@ -28,7 +28,7 @@ export default function IntroPage({ onEnter }) {
 
   }, []);
 
-  // START INTRO EXPERIENCE
+  // START MUSIC AFTER BUTTON CLICK
   const handleEnter = async () => {
 
     if (audioRef.current) {
@@ -37,19 +37,18 @@ export default function IntroPage({ onEnter }) {
 
       try {
 
-        // PLAY INTRO SONG
+        // PLAY MUSIC
         await audioRef.current.play();
 
-        // AFTER SONG ENDS → OPEN MAIN WEBSITE
-        audioRef.current.onended = () => {
+        // WAIT BEFORE ENTERING WEBSITE
+        setTimeout(() => {
           onEnter();
-        };
+        }, 20000);
 
       } catch (err) {
-
         console.log("Audio play blocked");
 
-        // OPEN WEBSITE ANYWAY
+        // ENTER ANYWAY
         onEnter();
       }
     }
@@ -58,7 +57,7 @@ export default function IntroPage({ onEnter }) {
   return (
     <div className="intro-container">
 
-      {/* INTRO AUDIO */}
+      {/* INTRO MUSIC */}
       <audio
         ref={audioRef}
         src={introMusic}
@@ -66,19 +65,16 @@ export default function IntroPage({ onEnter }) {
 
       <div className="intro-content">
 
-        {/* FIRST TEXT */}
         <h1 className="fade-text main-text">
           I didn’t know how to say this...
         </h1>
 
-        {/* SECOND TEXT */}
         {showSecond && (
           <p className="fade-text second-text">
             So I made this instead.
           </p>
         )}
 
-        {/* BUTTON */}
         {showButton && (
           <button
             className="heart-button"
