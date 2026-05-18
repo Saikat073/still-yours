@@ -36,16 +36,22 @@ export default function IntroPage({ onEnter }) {
       audioRef.current.volume = 0.5;
 
       try {
+
+        // PLAY MUSIC
         await audioRef.current.play();
+
+        // WAIT BEFORE ENTERING WEBSITE
+        setTimeout(() => {
+          onEnter();
+        }, 4000);
+
       } catch (err) {
         console.log("Audio play blocked");
+
+        // ENTER ANYWAY
+        onEnter();
       }
     }
-
-    // SMALL DELAY FOR CINEMATIC EFFECT
-    setTimeout(() => {
-      onEnter();
-    }, 1500);
   };
 
   return (
