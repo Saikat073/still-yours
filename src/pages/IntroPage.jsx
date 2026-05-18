@@ -43,7 +43,7 @@ export default function IntroPage({ onEnter }) {
         // WAIT BEFORE ENTERING WEBSITE
         setTimeout(() => {
           onEnter();
-        }, 20000);
+        }, 28000);
 
       } catch (err) {
         console.log("Audio play blocked");
